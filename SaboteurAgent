@@ -1,0 +1,12 @@
+from .agent import Agent
+from .graph import graph
+
+class SaboteurAgent(Agent):
+    def __init__(self):
+        super().__init__()
+
+    def move(self):
+        
+
+    def finished(self):
+        super().finished()
