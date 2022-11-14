@@ -1,10 +1,9 @@
+import os
 from graph import Graph
-
-from .node import Node
-
+from node import Node
 
 #get text from a file and parse it a global variable graph
-def parse(file):
+def parse(file:str):
     #open file
     f = open(file, 'r')
     #first line after "#N" is the number of nodes
@@ -13,19 +12,14 @@ def parse(file):
     nodes = []
     for i in range(num_nodes):
         line = f.readline().split()
-        if len(line) == 1 :
-            nodes.append(Node(i, False,0))
-        elif len(line) == 2:
-            if line[1] == 'B':
-                nodes.append(Node(i, True,0))
-            else:
-                num_of_people = int(line[1][1])
-                nodes.append(Node(i, False,num_of_people))
-        elif len(line) == 3:
-            num_of_people = int(line[1][1])
-            nodes.append(Node(i, True,num_of_people))
-        else:
-            raise Exception("Invalid input")
+        breakable = True if 'B'in line else False
+        number_of_people = 0
+        for cell in line:
+            if 'P' in cell:
+                number_of_people = int(cell[1:])
+
+        nodes.append(Node(i, breakable, number_of_people))
+            
     #next line is empty
     f.readline()
     # create matrix size num_nodes*num_nodes and fill it with -1
@@ -33,18 +27,20 @@ def parse(file):
     #rest of the file is the edges
     for line in f:
         line = line.split()
-        if len(line) != 4:
+        if len(line) < 4:
             raise Exception("Invalid input")
         else:
             w = int(line[3][1])
-            edges[int(line[1])][int(line[2])] = w
-    
-    #create global variable graph
-    global graph
-    graph = Graph(nodes, edges)
-    close(file)
+            edges[int(line[1])-1][int(line[2])-1] = w
+            edges[int(line[2])-1][int(line[1])-1] = w
+   
+    return Graph(nodes, edges)
 
            
     
-
+def main():
+    graph = parse("input.txt")
+    graph.print_graph()
     
+if __name__ == "__main__":
+    main()
