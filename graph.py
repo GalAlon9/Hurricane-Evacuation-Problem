@@ -1,7 +1,7 @@
-from .node import Node
-
-class graph:
-    def __init__(self, nodes: list[Node], edges: list[list[int]]):
+from node import Node
+from typing import List
+class Graph:
+    def __init__(self, nodes: List[Node], edges: List[List[int]]):
         self.nodes = nodes
         self.edges = edges
         self.people_to_save = sum(node.num_of_people for node in nodes)
