@@ -37,10 +37,4 @@ def parse(file:str):
     return Graph(nodes, edges)
 
            
-    
-def main():
-    graph = parse("input.txt")
-    graph.print_graph()
-    
-if __name__ == "__main__":
-    main()
+

@@ -1,6 +1,6 @@
 # abstract class for agent
 from abc import ABC, abstractmethod
-from .node import Node
+from node import Node
 
 
 class Agent(ABC):
@@ -16,7 +16,7 @@ class Agent(ABC):
     def move(self):
         pass
 
-    def finished(self):
-        return self.people_on_board == 0
+    # def finished(self):
+    #     return self.people_on_board == 0
     
 
