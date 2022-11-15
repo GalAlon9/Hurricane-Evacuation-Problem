@@ -1,23 +1,28 @@
 from graph import Graph
 from HumanAgent import HumanAgent
 from node import Node
+from StupidGreedyAgent import StupidGreedyAgent
 
 
 class Simulator:
     def __init__(self, num_of_agents: int, graph: Graph):
         self.num_of_agents = num_of_agents
         self.graph = graph
+        graph.print_graph()
         
     def run(self):
         #receive start position from user
         start_position = int(input("Enter start position: ")) -1
-        agent = HumanAgent(graph=self.graph, position=start_position)
+        #change this line to change agent type
+        agent = StupidGreedyAgent(self.graph, start_position)
+
         self.graph.remove_target(agent.position)
         agent.people_on_board += agent.position.num_of_people
         agent.position.num_of_people = 0
         
-        while not agent.finished():
+        while not agent.isFinished():
             #press enter to move
+            input()
             agent.move()
             self.graph.print_graph()
             print("Score: \n", agent.getScore())
@@ -56,6 +61,7 @@ def parse(file:str):
             w = int(line[3][1])
             edges[int(line[1])-1][int(line[2])-1] = w
             edges[int(line[2])-1][int(line[1])-1] = w
+
    
     return Graph(nodes, edges)
 

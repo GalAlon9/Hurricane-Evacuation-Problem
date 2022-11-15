@@ -1,10 +1,12 @@
 # abstract class for agent
 from abc import ABC, abstractmethod
 from node import Node
+from graph import Graph
 
 
 class Agent(ABC):
-    def __init__(self, position:Node):
+    def __init__(self, position:Node, graph : Graph):
+        self.graph = graph
         self.position = position
         self.people_on_board = 0
         self.timer =0
@@ -16,7 +18,7 @@ class Agent(ABC):
     def move(self):
         pass
 
-    # def finished(self):
-    #     return self.people_on_board == 0
+    def isFinished(self):
+        return self.graph.people_to_save == self.people_on_board
     
 

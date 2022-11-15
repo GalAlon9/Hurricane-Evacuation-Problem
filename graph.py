@@ -25,5 +25,13 @@ class Graph:
         if node in self.targets:
             self.targets.remove(node)
         
-    
+    def  visit(self, node: Node):
+        node.visited = True
+        for i in range(len(self.edges[node.id])):
+            if self.edges[node.id][i] != -1:
+                self.edges[node.id][i] = -1
+                self.edges[i][node.id] = -1
+        self.targets.remove(node)
+        self.people_to_save -= node.num_of_people
+        node.num_of_people = 0
     
