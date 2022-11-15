@@ -4,8 +4,7 @@ from graph import Graph
 class HumanAgent(Agent):
 
     def __init__(self,graph:Graph, position:int):
-        super().__init__(position= graph.get_node(position))
-        self.graph = graph
+        super().__init__(position= graph.get_node(position), graph=graph)
 
     def move(self):
         #recieve input from user
@@ -37,7 +36,7 @@ class HumanAgent(Agent):
 
         
 
-    def finished(self):
+    def isFinished(self):
         if self.people_on_board == self.graph.people_to_save:
             return True
         else:
