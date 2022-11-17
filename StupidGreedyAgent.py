@@ -9,7 +9,6 @@ def getPath(start:int,parents,nearestIndex):
     while nearestIndex!=start:
         path.append(nearestIndex)
         nearestIndex=parents[nearestIndex]
-    path.append(start)
     path.reverse()
     return path
     
@@ -21,6 +20,7 @@ def dijkstra(start:Node, graph:Graph):
     added=[False]*len(graph.nodes)
     shortestDists[start.id]=0
     parents=[None]*len(graph.nodes)
+    #parents is array where each index contains the index of its parent in the shortest path
     for i in range(1,len(graph.nodes)):
         nearestIndex=-1
         shortestDist=sys.maxsize
@@ -54,19 +54,13 @@ class StupidGreedyAgent(Agent):
         super().__init__(position= graph.get_node(position), graph=graph)
 
     def move(self):
-        self.shortestPathToPeople = dijkstra(self.position, self.graph)
-        if len(self.shortestPathToPeople)>0:
-            self.shortestPathToPeople.pop(0)
-        print(self.shortestPathToPeople)
-        if len(self.shortestPathToPeople)==0:
+        shortestPathToPeople = dijkstra(self.position, self.graph)
+        print(shortestPathToPeople)
+        if len(shortestPathToPeople)==0:
             self.isFinished()
         else:
-            nextMove = self.shortestPathToPeople.pop(0)
-            self.timer += self.graph.edges[self.position.id][nextMove]
-            self.position = self.graph.get_node(nextMove)
-            self.people_on_board =self.people_on_board + self.position.num_of_people
-            self.position.num_of_people = 0
-            #TO DO add break
+            self.apply_move(self.graph.get_node(shortestPathToPeople[0]))
 
     def isFinished(self):
-        super().isFinished()
+        shortestPathToPeople = dijkstra(self.position, self.graph)
+        return len(shortestPathToPeople)==0

@@ -17,20 +17,7 @@ class HumanAgent(Agent):
             print("Invalid move")
             return 0
         else :
-            self.timer += self.graph.edges[self.position.id][next_node.id]
-            #if the node is breakable, make all the edges including it -1
-            if self.position.breakable:
-                for i in range(len(self.graph.edges)):
-                    self.graph.edges[i][self.position.id] = -1
-                    self.graph.edges[self.position.id][i] = -1
-            #    self.graph.edges[:,self.position.id] = -1
-            #    self.graph.edges[self.position.id,:] = -1
-            self.position = next_node
-            self.graph.remove_target(self.position)
-            self.people_on_board += self.position.num_of_people
-            self.position.num_of_people = 0
-            
-
+            self.apply_move(next_node)
             return 1
 
 

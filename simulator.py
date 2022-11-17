@@ -1,21 +1,23 @@
+
 from graph import Graph
 from HumanAgent import HumanAgent
 from node import Node
 from StupidGreedyAgent import StupidGreedyAgent
-
+from SaboteurAgent import SaboteurAgent
 
 class Simulator:
     def __init__(self, num_of_agents: int, graph: Graph):
         self.num_of_agents = num_of_agents
         self.graph = graph
         graph.print_graph()
+        for node in graph.nodes:
+            print(node.id, node.num_of_people,node.breakable)
         
     def run(self):
         #receive start position from user
-        start_position = int(input("Enter start position: ")) -1
+        start_position = int(input("Enter start position: ")) 
         #change this line to change agent type
-        agent = StupidGreedyAgent(self.graph, start_position)
-
+        agent = SaboteurAgent(self.graph, self.graph.get_node(start_position))
         self.graph.remove_target(agent.position)
         agent.people_on_board += agent.position.num_of_people
         agent.position.num_of_people = 0
