@@ -28,6 +28,9 @@ def dijkstra(start:Node, graph:Graph):
             if shortestDists[index]<shortestDist and not added[index]:
                 nearestIndex=index
                 shortestDist=shortestDists[index]
+        if(nearestIndex==-1):
+            #no path to breakable node
+            return []        
         if graph.get_node(nearestIndex).num_of_people>0:
             #found node with people
             return getPath(start.id,parents,nearestIndex)
@@ -44,14 +47,14 @@ def dijkstra(start:Node, graph:Graph):
         if shortestDists[index]<shortestDist and not added[index]:
             nearestIndex=index
             shortestDist=shortestDists[index]
-    if graph.get_node(nearestIndex).num_of_people>0:
+    if nearestIndex!= -1 and graph.get_node(nearestIndex).num_of_people>0:
         return getPath(start.id,parents,nearestIndex)
     return []
         
 
 class StupidGreedyAgent(Agent):
-    def __init__(self,graph:Graph, position:int):
-        super().__init__(position= graph.get_node(position), graph=graph)
+    def __init__(self,graph:Graph, position:Node):
+        super().__init__(position= position, graph=graph)
 
     def move(self):
         shortestPathToPeople = dijkstra(self.position, self.graph)

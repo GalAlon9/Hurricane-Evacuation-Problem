@@ -17,7 +17,7 @@ class Simulator:
         #receive start position from user
         start_position = int(input("Enter start position: ")) 
         #change this line to change agent type
-        agent = SaboteurAgent(self.graph, self.graph.get_node(start_position))
+        agent = StupidGreedyAgent(self.graph, self.graph.get_node(start_position))
         self.graph.remove_target(agent.position)
         agent.people_on_board += agent.position.num_of_people
         agent.position.num_of_people = 0
@@ -50,8 +50,11 @@ def parse(file:str):
 
         nodes.append(Node(i, breakable, number_of_people))
             
-    #next line is empty
+    #read and throw away the next line
     f.readline()
+    
+
+
     # create matrix size num_nodes*num_nodes and fill it with -1
     edges = [[-1 for i in range(num_nodes)] for j in range(num_nodes)]
     #rest of the file is the edges
@@ -61,8 +64,8 @@ def parse(file:str):
             raise Exception("Invalid input")
         else:
             w = int(line[3][1])
-            edges[int(line[1])-1][int(line[2])-1] = w
-            edges[int(line[2])-1][int(line[1])-1] = w
+            edges[int(line[1])][int(line[2])] = w
+            edges[int(line[2])][int(line[1])] = w
 
    
     return Graph(nodes, edges)
