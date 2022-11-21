@@ -34,4 +34,5 @@ class Graph:
         self.targets.remove(node)
         self.people_to_save -= node.num_of_people
         node.num_of_people = 0
+
     

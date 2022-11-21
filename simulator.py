@@ -1,9 +1,9 @@
 
 from graph import Graph
-from HumanAgent import HumanAgent
+from seconed_try.Agents import Agent
 from node import Node
-from StupidGreedyAgent import StupidGreedyAgent
-from SaboteurAgent import SaboteurAgent
+from seconed_try.Agents import SaboteurAgent
+from seconed_try.Agents import StupidGreedyAgent
 
 class Simulator:
     def __init__(self, num_of_agents: int, graph: Graph):

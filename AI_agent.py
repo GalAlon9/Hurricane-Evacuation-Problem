@@ -9,5 +9,11 @@ class AI_agent(ABC):
         self.position = position
         self.people_on_board = 0
         self.timer =0
+        
     
+
+    def heuristic(self, state):
+        #return the heuristic value of the state : sum of minimum distances from current position to all targets
+        
+
     
