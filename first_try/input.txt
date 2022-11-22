@@ -1,0 +1,14 @@
+#N 5      ; number of vertices n in graph (from 1 to n)
+#V0                  ; Vertex 1, nothing of interest
+#V1 P1 B             ; Vertex 2, initially contains 1 person to be rescued, and is brittle
+#V2                  ; Vertex 3, has no people and is brittle
+#V3 P2               ; Vertex 4, initially contains 2 persons to be rescued
+#V4 P3 B             ; Vertex 4, initially contains 2 persons to be rescued
+
+#E1 0 1 W3
+#E1 0 2 W4
+#E1 0 4 W1
+#E1 1 2 W2
+#E1 3 1 W8
+#E1 2 3 W1
+#E1 2 4 W1

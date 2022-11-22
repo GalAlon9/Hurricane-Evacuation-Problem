@@ -1,0 +1,33 @@
+Intro to AI task1.A:
+    Env:
+        Graph-  
+            node- 
+                int index
+                int people
+                boolean is_breakable
+                boolean broken
+            edges-
+                [][] matrix of neighbours - including weights:
+                    -1 if no edge and w if there is.
+            
+        simulation control:
+    agent:
+        type
+        node/ (int) node index position
+        int people saved
+        int / datetime time taken.
+        
+        methods:
+            void next move
+            int get_score
+            boolean  is_done
+            
+        
+            
+            
+	Todos big:
+		1)
+		2)
+		3)
+    Todo small:
+        1)

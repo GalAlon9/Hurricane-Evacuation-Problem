@@ -1,6 +1,6 @@
 # abstract class for AI agent
 from abc import ABC, abstractmethod
-from graph import Graph
+from first_try.graph_try.graph import Graph
 
 
 class AI_agent(ABC):
@@ -14,6 +14,7 @@ class AI_agent(ABC):
 
     def heuristic(self, state):
         #return the heuristic value of the state : sum of minimum distances from current position to all targets
+        return 0
         
 
     
